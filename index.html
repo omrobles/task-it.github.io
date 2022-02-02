@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+
   
 </head>
 <body>
@@ -13,7 +15,7 @@
 
     </header>
     <section>
-        <div>
+        <div >
             <label for="task">Tarea</label>
             <input type="text" name="task" id="task">
             <label for="description">Descripción</label>
@@ -21,6 +23,10 @@
             <label for="responsible">Responsable</label>
             <input type="text" name="responsible" id="responsible">
             <button id="button">Crear</button>
+        </div>
+        <div>
+            <ul id="listaTareas">
+            </ul>
         </div>
     </section>
     <footer>
