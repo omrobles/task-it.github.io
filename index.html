@@ -15,14 +15,16 @@
 
     </header>
     <section>
-        <div >
+        <div>
+            <h2>Todos los campos son obligatorios</h2>
             <label for="task">Tarea</label>
             <input type="text" name="task" id="task">
             <label for="description">Descripción</label>
             <textarea rows="3" name="description" id="description"></textarea>
             <label for="responsible">Responsable</label>
             <input type="text" name="responsible" id="responsible">
-            <button id="button">Crear</button>
+            <button id="createButton" class="show">Crear</button>
+            <button id="updateButton" class="hide">Actualizar</button>
         </div>
         <div>
             <ul id="listaTareas">
