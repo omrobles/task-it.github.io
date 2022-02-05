@@ -7,6 +7,8 @@ let taskTitle = document.getElementById("task"),
     list = document.getElementById("listaTareas");
 let tasks=[];
 
+readData();
+
 // función para crear nuevas tareas
 createButton.addEventListener("click",function(){
     if(taskTitle.value == '' || taskDescription.value == '' || taskResponsible.value == ''){
@@ -35,6 +37,8 @@ updateButton.addEventListener('click', function(){
     storeData();
     readData();
     clearValues();
+    createButton.setAttribute('class', 'show');
+    updateButton.setAttribute('class', 'hide');
     taskTitle.select();
 });
 
