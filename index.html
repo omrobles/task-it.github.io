@@ -6,25 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 
   
 </head>
 <body>
-    <header>
-
+    <header class="row">
+        <img src="media/Task-It.png" alt="Task-It logo">
     </header>
-    <section>
-        <div>
-            <h2>Todos los campos son obligatorios</h2>
-            <label for="task">Tarea</label>
+    <section class="row">
+        <div class="form">
+            <h2 id="errorMessage" class="hide">Todos los campos son obligatorios<ion-icon name="close-circle-outline"></ion-icon></h2>
+            <h1>Crea un Task-It</h1>
+            <label for="task">Titulo de tu Task-It</label>
             <input type="text" name="task" id="task">
             <label for="description">Descripción</label>
             <textarea rows="3" name="description" id="description"></textarea>
             <label for="responsible">Responsable</label>
             <input type="text" name="responsible" id="responsible">
-            <button id="createButton" class="show">Crear</button>
-            <button id="updateButton" class="hide">Actualizar</button>
+            <p id="createButton" class="button show">Crear</p>
+            <p id="updateButton" class="button hide">Actualizar</p>
         </div>
         <div>
             <ul id="listaTareas">
