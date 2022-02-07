@@ -12,23 +12,32 @@
   
 </head>
 <body>
-    <header class="row">
-        <img src="media/Task-It.png" alt="Task-It logo">
+    <header class="">
+        <div class="navbar">
+            <img src="media/Task-It.png" alt="Task-It logo">
+        </div>
+        <div class="row">
+            <div id="form">
+                <h2 id="errorMessage" class="hide"><ion-icon name="close-circle-outline"></ion-icon>Todos los campos son obligatorios</h2>
+                <div>
+                    <label for="task">Titulo de tu Task-It</label>
+                    <input type="text" name="task" id="task">
+                    <label for="responsible">Responsable</label>
+                    <input type="text" name="responsible" id="responsible">
+                </div>
+                <div>
+                    <label for="description">Descripción</label>
+                    <textarea rows="5" name="description" id="description"></textarea>
+                </div>
+                <div>
+                    <p id="createButton" class="button show">Crear</p>
+                    <p id="updateButton" class="button hide">Actualizar</p>
+                </div>  
+            </div>
+        </div>
     </header>
     <section class="row">
-        <div class="form">
-            <h2 id="errorMessage" class="hide">Todos los campos son obligatorios<ion-icon name="close-circle-outline"></ion-icon></h2>
-            <h1>Crea un Task-It</h1>
-            <label for="task">Titulo de tu Task-It</label>
-            <input type="text" name="task" id="task">
-            <label for="description">Descripción</label>
-            <textarea rows="3" name="description" id="description"></textarea>
-            <label for="responsible">Responsable</label>
-            <input type="text" name="responsible" id="responsible">
-            <p id="createButton" class="button show">Crear</p>
-            <p id="updateButton" class="button hide">Actualizar</p>
-        </div>
-        <div>
+        <div id="content">
             <ul id="listaTareas">
             </ul>
         </div>
