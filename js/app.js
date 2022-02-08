@@ -1,4 +1,4 @@
-// Declaración de elementos
+// Declaración de elementos y variables
 let taskTitle = document.getElementById("task"),
     taskDescription = document.getElementById("description"),
     taskResponsible = document.getElementById("responsible"),
@@ -9,7 +9,6 @@ let taskTitle = document.getElementById("task"),
     container = document.getElementById("main-container"),
     checkbox = document.getElementById("checkbox"),
     prevScrollpos = window.pageYOffset,
-
     list = document.getElementById("listaTareas");
 let tasks=[],
     tasksOpen=[];
@@ -24,6 +23,7 @@ createButton.addEventListener("click",function(){
         error();
         taskTitle.select();
     } else {
+        errorMessage.setAttribute('class','hide');
         taskPush()
         storeData();
         readData();
@@ -97,9 +97,6 @@ function readData (){
                 list.appendChild(insertLi(task));
                 });
         }
-        // tasks.forEach((task) => {
-        // list.appendChild(insertLi(task));
-        // });
     } else{
         const message1 = document.createElement('li');
         message1.innerText = 'No existen tareas';
@@ -116,90 +113,117 @@ function clearValues(){
 
 // función para crear los elementos li
 function insertLi(task) {
-    // Crear los elementos del li
-    let liNew = document.createElement('li'),
-        divTaskTitle = document.createElement('div'),
-        divIcons = document.createElement('div'),
-        divTaskDescription = document.createElement('div'),
-        divResponsible = document.createElement('div'),
-        checkIcon = document.createElement('ion-icon'), 
-        editIcon = document.createElement('ion-icon'),
-        copyIcon = document.createElement('ion-icon'),
-        removeIcon = document.createElement('ion-icon');
-        
-        // Agrega el contenido de los valores del localStorage
-        checkStatus = task['check'];
-        checkStatus === true ? divTaskTitle.innerText = task['task'] + ' - Completado' : divTaskTitle.innerText = task['task'];
-        divTaskDescription.innerText = task['description'];
-        divResponsible.innerText = task['responsible'];
-        
-        // Funcionamiento icono check
-        checkIcon.setAttribute('name', 'checkmark-outline');
-        checkStatus === true ? checkIcon.setAttribute('class', 'checked') : checkIcon.setAttribute('class', 'noCheck');
-        checkIcon.addEventListener('click', function (){
-            checkIcon.setAttribute('class', 'checked');
-            liIndex = tasks.indexOf(task);
-            tasks[liIndex] = {
-                task: task['task'],
-                description: task['description'],
-                responsible: task['responsible'],
-                check: true
-            };
-            storeData();
-            readData();
-        });
-
-        // Funcionamiento icono edit
-        editIcon.setAttribute('name', 'create-outline');
-        editIcon.setAttribute('class', 'editIcon');
-        if (checkStatus === true) {editIcon.setAttribute('class', 'hide')};
-        editIcon.addEventListener('click', function (){
-            liIndex = tasks.indexOf(task);
-            taskTitle.value = tasks[liIndex].task;
-            taskDescription.value = tasks[liIndex].description;
-            taskResponsible.value = tasks[liIndex].responsible;
-            createButton.setAttribute('class', 'hide');
-            updateButton.setAttribute('class', 'show');
-            form.setAttribute('style', 'top: 70px;');
-        });
-
-        // Funcionamiento icono copy
-        copyIcon.setAttribute('name', 'copy-outline');
-        copyIcon.setAttribute('class', 'copyIcon');
-        copyIcon.addEventListener('click', function (){
-            liIndex = tasks.indexOf(task);
-            taskTitle.value = tasks[liIndex].task;
-            taskDescription.value = tasks[liIndex].description;
-            taskResponsible.value = tasks[liIndex].responsible;
-            form.setAttribute('style', 'top: 70px;');
-        });
-
-        // Funcionamiento icono eliminar
-        removeIcon.setAttribute('name', 'trash-outline');
-        removeIcon.setAttribute('class', 'removeIcon');
-        removeIcon.addEventListener('click', function (){
-            liIndex = tasks.indexOf(task);
-            tasks.splice(liIndex,1);
-            storeData();
-            readData();
-        });
-
-        divIcons.appendChild(checkIcon);
-        divIcons.appendChild(editIcon);
-        divIcons.appendChild(copyIcon);
-        divIcons.appendChild(removeIcon);
-
-        liNew.appendChild(divTaskTitle);
-        liNew.appendChild(divIcons);
-        liNew.appendChild(divTaskDescription);
-        liNew.appendChild(divResponsible);
-        return liNew;
+    let liNew = document.createElement('li');    
+    if((tasks.indexOf(task) + 1) % 2 === 1 || (tasksOpen.indexOf(task) + 1) % 2 === 1){
+        liNew.setAttribute('style','background-color: #b6daf2;')
+    }
+    liNew.appendChild(taskTitleCreate(task));
+    liNew.appendChild(divIconsCreate(task));
+    liNew.appendChild(taskDescCreate(task));
+    liNew.appendChild(divRespCreate(task));
+    return liNew;
 };
 
 // Función para desplegar mensaje de error
 function error(){
     errorMessage.setAttribute('class','show');
 };
+
+// función crea titulo del li
+function taskTitleCreate(task){
+    let divTaskTitle = document.createElement('div');
+    checkStatus = task['check'];
+    checkStatus === true ? divTaskTitle.innerText = task['task'] + ' - Completado' : divTaskTitle.innerText = task['task'];
+    return divTaskTitle;
+}
+
+// función crea div de iconos
+function divIconsCreate(task){
+    let divIcons = document.createElement('div');
+    divIcons.appendChild(checkIconCreate(task));
+    divIcons.appendChild(editIconCreate(task));
+    divIcons.appendChild(copyIconCreate(task));
+    divIcons.appendChild(removeIconCreate(task));
+    return divIcons;
+}
+
+// función crea descripcion del li
+function taskDescCreate(task){
+    let divTaskDescription = document.createElement('div');
+    divTaskDescription.innerText = task['description'];
+    return divTaskDescription;
+}
+
+// función crea responsable del li
+function divRespCreate(task){
+    let divResponsible = document.createElement('div');
+    divResponsible.innerText = task['responsible'];
+    return divResponsible;
+}
+
+function checkIconCreate(task){
+    let checkIcon = document.createElement('ion-icon'); 
+    checkIcon.setAttribute('name', 'checkmark-outline');
+    checkStatus = task['check'];
+    checkStatus === true ? checkIcon.setAttribute('class', 'checked') : checkIcon.setAttribute('class', 'noCheck');
+    checkIcon.addEventListener('click', function (){
+        checkIcon.setAttribute('class', 'checked');
+        liIndex = tasks.indexOf(task);
+        tasks[liIndex] = {
+            task: task['task'],
+            description: task['description'],
+            responsible: task['responsible'],
+            check: true
+        };
+        storeData();
+        readData();
+    });
+    return checkIcon;
+}
+
+function editIconCreate(task){
+    let editIcon = document.createElement('ion-icon');
+    editIcon.setAttribute('name', 'create-outline');
+    editIcon.setAttribute('class', 'editIcon');
+    if (checkStatus === true) {editIcon.setAttribute('class', 'hide')};
+    editIcon.addEventListener('click', function (){
+        liIndex = tasks.indexOf(task);
+        taskTitle.value = tasks[liIndex].task;
+        taskDescription.value = tasks[liIndex].description;
+        taskResponsible.value = tasks[liIndex].responsible;
+        createButton.setAttribute('class', 'hide');
+        updateButton.setAttribute('class', 'show');
+        container.setAttribute('style', 'top: 70px;');
+    });
+    return editIcon;
+}
+
+function copyIconCreate(task){
+    let copyIcon = document.createElement('ion-icon');
+    copyIcon.setAttribute('name', 'copy-outline');
+    copyIcon.setAttribute('class', 'copyIcon');
+    copyIcon.addEventListener('click', function (){
+        liIndex = tasks.indexOf(task);
+        taskTitle.value = tasks[liIndex].task;
+        taskDescription.value = tasks[liIndex].description;
+        taskResponsible.value = tasks[liIndex].responsible;
+        container.setAttribute('style', 'top: 70px;');
+    });
+    return copyIcon;
+}
+
+function removeIconCreate(task){
+    let removeIcon = document.createElement('ion-icon');
+    removeIcon.setAttribute('name', 'trash-outline');
+    removeIcon.setAttribute('class', 'removeIcon');
+    removeIcon.addEventListener('click', function (){
+        liIndex = tasks.indexOf(task);
+        tasks.splice(liIndex,1);
+        storeData();
+        readData();
+    });
+    return removeIcon;
+}
 
 
 
