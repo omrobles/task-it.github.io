@@ -159,7 +159,6 @@ input{
     padding-left: 3px;
 }
 
-
 /* TASKS LIST */
 #content{
     position: relative;
@@ -262,6 +261,28 @@ ion-icon:hover{
     border: 2px solid #2ecc71;
     color: #2ecc71;
     visibility: visible;
+}
+
+/* FOOTER */
+footer{
+    position: fixed;
+    bottom: 0;
+    background-color: #3498db;
+    height: 30px;
+    padding-top: 5px;
+    width: 100%;
+    
+}
+
+footer p{
+    text-align: center;
+    font-size: 70%; 
+    color: #fff;
+}
+
+footer img{
+    padding-top: 2px;
+    height: 12px;
 }
 
 
