@@ -5,22 +5,25 @@ let taskTitle = document.getElementById("task"),
     createButton = document.getElementById("createButton"),
     updateButton = document.getElementById("updateButton"),
     h2Message = document.querySelector('h2'),
-    errorMessage = document.getElementById("errorMessage"),
-    form = document.getElementById("form"),
+    errorMessage = document.getElementById("container1"),
+    container = document.getElementById("main-container"),
+    checkbox = document.getElementById("checkbox"),
     prevScrollpos = window.pageYOffset,
+
     list = document.getElementById("listaTareas");
-let tasks=[];
+let tasks=[],
+    tasksOpen=[];
 
 // Primera lectura de datos del LocalStorage
 readData();
 
+
 // función para crear nuevas tareas
 createButton.addEventListener("click",function(){
     if(taskTitle.value == '' || taskDescription.value == '' || taskResponsible.value == ''){
-       error();
+        error();
         taskTitle.select();
     } else {
-        errorMessage.setAttribute('class','hide');
         taskPush()
         storeData();
         readData();
@@ -34,7 +37,8 @@ updateButton.addEventListener('click', function(){
     tasks[liIndex] = {
         task: taskTitle.value,
         description: taskDescription.value,
-        responsible: taskResponsible.value
+        responsible: taskResponsible.value,
+        check: false
     };
     storeData();
     readData();
@@ -44,14 +48,22 @@ updateButton.addEventListener('click', function(){
     taskTitle.select();
 });
 
+checkbox.addEventListener('click',function(){
+    tasks.forEach(task => {
+        if(task['check'] === false){
+            tasksOpen.push(task);
+        }
+    });
+    readData();
+});
+
 // funcion ocultar forma
 window.addEventListener('scroll',function(){
     let currentScrollPos = window.pageYOffset;
    	if (prevScrollpos > currentScrollPos) {
-        form.setAttribute('style', 'top: 70px;');
-  	 	//  form.setAttribute('style', 'top: ' + currentScrollPos + 'px;');
+            container.setAttribute('style', 'top: 70px;');
   		} else {
-  	 	 form.setAttribute('style', 'top: -300px;');
+            container.setAttribute('style', 'top: -300px;');
   		}
   		prevScrollpos = currentScrollPos;
 });
@@ -76,9 +88,18 @@ function readData (){
     tasks = JSON.parse(localStorage.getItem('tasksList'));
     list.innerHTML = "<ul></ul>"
     if(tasks.length != 0){
-        tasks.forEach((task) => {
-        list.appendChild(insertLi(task));
-        });
+        if(checkbox.checked === true){
+            tasksOpen.forEach((task) => {
+                list.appendChild(insertLi(task));
+                });
+        } else {
+            tasks.forEach((task) => {
+                list.appendChild(insertLi(task));
+                });
+        }
+        // tasks.forEach((task) => {
+        // list.appendChild(insertLi(task));
+        // });
     } else{
         const message1 = document.createElement('li');
         message1.innerText = 'No existen tareas';
@@ -107,22 +128,31 @@ function insertLi(task) {
         removeIcon = document.createElement('ion-icon');
         
         // Agrega el contenido de los valores del localStorage
-        divTaskTitle.innerText = task['task'];
+        checkStatus = task['check'];
+        checkStatus === true ? divTaskTitle.innerText = task['task'] + ' - Completado' : divTaskTitle.innerText = task['task'];
         divTaskDescription.innerText = task['description'];
         divResponsible.innerText = task['responsible'];
-
+        
         // Funcionamiento icono check
         checkIcon.setAttribute('name', 'checkmark-outline');
-        checkIcon.setAttribute('class', 'noCheck');
+        checkStatus === true ? checkIcon.setAttribute('class', 'checked') : checkIcon.setAttribute('class', 'noCheck');
         checkIcon.addEventListener('click', function (){
-            liIndex = tasks.indexOf(task);
             checkIcon.setAttribute('class', 'checked');
-            console.log('estas presionanso el check')
+            liIndex = tasks.indexOf(task);
+            tasks[liIndex] = {
+                task: task['task'],
+                description: task['description'],
+                responsible: task['responsible'],
+                check: true
+            };
+            storeData();
+            readData();
         });
 
         // Funcionamiento icono edit
         editIcon.setAttribute('name', 'create-outline');
         editIcon.setAttribute('class', 'editIcon');
+        if (checkStatus === true) {editIcon.setAttribute('class', 'hide')};
         editIcon.addEventListener('click', function (){
             liIndex = tasks.indexOf(task);
             taskTitle.value = tasks[liIndex].task;

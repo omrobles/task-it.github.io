@@ -16,23 +16,38 @@
         <div class="navbar">
             <img src="media/Task-It.png" alt="Task-It logo">
         </div>
-        <div class="row">
-            <div id="form">
-                <h2 id="errorMessage" class="hide"><ion-icon name="close-circle-outline"></ion-icon>Todos los campos son obligatorios</h2>
-                <div>
-                    <label for="task">Titulo de tu Task-It</label>
-                    <input type="text" name="task" id="task">
-                    <label for="responsible">Responsable</label>
-                    <input type="text" name="responsible" id="responsible">
+        <div id="main-container" class="row">
+            <div id="container1" class="hide">
+                <h2 id="errorMessage" >
+                    <span><ion-icon name="close-circle-outline"></ion-icon></span>
+                    Todos los campos son obligatorios
+                </h2>
+            </div>
+            <div id="container2">
+                <div id="form">
+                    <div>
+                        <label for="task">Titulo de tu Task-It</label>
+                        <input type="text" name="task" id="task">
+                        <label for="responsible">Responsable</label>
+                        <input type="text" name="responsible" id="responsible">
+                    </div>
+                    <div>
+                        <label for="description">Descripción</label>
+                        <textarea rows="5" name="description" id="description"></textarea>
+                    </div>
+                    <div>
+                        <p id="createButton" class="button show">Crear</p>
+                        <p id="updateButton" class="button hide">Actualizar</p>
+                    </div>
                 </div>
+            </div>
+            <div id="container3">
+                <p>Lista de Task-It's</p>
                 <div>
-                    <label for="description">Descripción</label>
-                    <textarea rows="5" name="description" id="description"></textarea>
+                    <input type="checkbox" name="checkbox" id="checkbox">
+                    <label for="checkbox">No mostrar completados</label>
                 </div>
-                <div>
-                    <p id="createButton" class="button show">Crear</p>
-                    <p id="updateButton" class="button hide">Actualizar</p>
-                </div>  
+                
             </div>
         </div>
     </header>
