@@ -4,7 +4,6 @@ let taskTitle = document.getElementById("task"),
     taskResponsible = document.getElementById("responsible"),
     createButton = document.getElementById("createButton"),
     updateButton = document.getElementById("updateButton"),
-    h2Message = document.querySelector('h2'),
     errorMessage = document.getElementById("container1"),
     createMessage = document.getElementById("container4"),
     updateMessage = document.getElementById("container5"),
@@ -21,7 +20,6 @@ let tasks=[],
 
 // Primera lectura de datos del LocalStorage
 readData();
-
 
 // función para crear nuevas tareas
 createButton.addEventListener("click",function(){
@@ -73,6 +71,20 @@ window.addEventListener('scroll',function(){
             container.setAttribute('style', 'top: -300px;');
   		}
   		prevScrollpos = currentScrollPos;
+});
+
+// Funcion para confirmar eliminar elemento
+accept.addEventListener('click',function(){
+    tasks.splice(liIndex,1);
+    removePrompt();
+    storeData();
+    readData();
+    removeQuestion.setAttribute('class', 'hide');
+});
+
+// funcion cancelar eliminar
+cancel.addEventListener('click', function(){
+    removeQuestion.setAttribute('class', 'hide');
 });
 
 // Funcion para empujar datos al array tasks
@@ -273,20 +285,6 @@ function removeIconCreate(task){
 
     return removeIcon;
 }
-
-accept.addEventListener('click',function(){
-    // liIndex = tasks.indexOf(task);
-    console.log(liIndex);
-    tasks.splice(liIndex,1);
-    removePrompt();
-    storeData();
-    readData();
-    removeQuestion.setAttribute('class', 'hide');
-});
-
-cancel.addEventListener('click', function(){
-    removeQuestion.setAttribute('class', 'hide');
-});
     
 
 

@@ -49,7 +49,6 @@ html body{
 #main-container{
     position: fixed;
     top: 70px;
-    left: 12.55%;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -58,6 +57,18 @@ html body{
     transition: top 0.7s;
     padding-bottom: 3px;
     border-bottom: 3px solid #3498db;
+}
+
+#container1,
+#container2,
+#container3,
+#container4,
+#container5,
+#container6,
+#container7{
+    max-width: 1140px;
+    margin: 0 auto;
+    width: 100%;
 }
 
 #container1 h2,
@@ -164,7 +175,6 @@ input{
 #container3{
     display: flex;
     flex-direction: row;
-    margin-left: 10px;
 }
 
 #container3 p{
