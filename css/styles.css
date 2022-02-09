@@ -60,10 +60,10 @@ html body{
     border-bottom: 3px solid #3498db;
 }
 
-#errorMessage{
-    border: red solid 1px;
-    background-color: rgba(255, 0, 0, 0.308);
-    color: red;
+#container1 h2,
+#container4 h2,
+#container5 h2,
+#container6 h2{
     width: 27%;
     border-radius: 5px;
     font-size: 80%;
@@ -74,7 +74,34 @@ html body{
     flex-direction: row;
 }
 
-#errorMessage ion-icon{
+#errorMessage{
+    border: red solid 2px;
+    background-color: rgba(255, 0, 0, 0.308);
+    color: red;
+}
+
+#createMessage{
+    border: #2ecc71 solid 2px;
+    background-color: #2ecc7041;
+    color: #2ecc71;
+}
+
+#updateMessage{
+    border: #f1c40f solid 2px;
+    background-color: #f1c40f38;
+    color: #f1c40f;
+}
+
+#removeMessage{
+    border: red solid 2px;
+    background-color: rgba(255, 0, 0, 0.308);
+    color: red;
+}
+
+#container1 ion-icon,
+#container4 ion-icon,
+#container5 ion-icon,
+#container6 ion-icon{
     float: left;
     padding-top: 2px;
     padding-right: 2px;
@@ -157,6 +184,44 @@ input{
     font-weight: 500;
     margin-top:5px;
     padding-left: 3px;
+}
+#container7 {
+    display: relative;
+}
+
+#container7 div{
+    display: flex;
+    width: 100%;
+    flex: row;
+    padding: 8px 0;
+    border: 4px solid red;
+    border-radius: 7px;
+}
+
+#container7 p{
+    margin-right: 7px;
+    padding: 5px 10px;
+}
+
+#container7 p:nth-child(1){
+    font-weight: 700;
+}
+
+#container7 p:nth-child(2),
+#container7 p:nth-child(3){
+    border: 2px solid red;
+    border-radius: 10px;
+    font-weight: 400;
+}
+
+#container7 p:nth-child(2):hover,
+#container7 p:nth-child(3):hover{
+    border: 2px solid red;
+    background-color: red;
+    color: #fff;
+    font-weight: 500;
+    transition: background-color 0.3s, color 0.3s, font-weight 0.3s;
+    cursor: pointer;
 }
 
 /* TASKS LIST */

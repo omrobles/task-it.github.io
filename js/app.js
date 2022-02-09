@@ -6,8 +6,14 @@ let taskTitle = document.getElementById("task"),
     updateButton = document.getElementById("updateButton"),
     h2Message = document.querySelector('h2'),
     errorMessage = document.getElementById("container1"),
+    createMessage = document.getElementById("container4"),
+    updateMessage = document.getElementById("container5"),
+    removeMessage = document.getElementById("container6"),
+    removeQuestion = document.getElementById("container7"),
     container = document.getElementById("main-container"),
     checkbox = document.getElementById("checkbox"),
+    accept = document.getElementById("accept"),
+    cancel = document.getElementById("cancel"),
     prevScrollpos = window.pageYOffset,
     list = document.getElementById("listaTareas");
 let tasks=[],
@@ -20,14 +26,14 @@ readData();
 // función para crear nuevas tareas
 createButton.addEventListener("click",function(){
     if(taskTitle.value == '' || taskDescription.value == '' || taskResponsible.value == ''){
-        error();
+        errorPrompt();
         taskTitle.select();
     } else {
-        errorMessage.setAttribute('class','hide');
         taskPush()
         storeData();
         readData();
         clearValues();
+        createPrompt();
         taskTitle.select();
     }
 });
@@ -43,6 +49,7 @@ updateButton.addEventListener('click', function(){
     storeData();
     readData();
     clearValues();
+    updatePrompt();
     createButton.setAttribute('class', 'show');
     updateButton.setAttribute('class', 'hide');
     taskTitle.select();
@@ -125,9 +132,50 @@ function insertLi(task) {
 };
 
 // Función para desplegar mensaje de error
-function error(){
+function errorPrompt(){
     errorMessage.setAttribute('class','show');
+    createMessage.setAttribute('class','hide');
+    updateMessage.setAttribute('class','hide');
+    removeMessage.setAttribute('class','hide');
+    hidePrompt();
 };
+
+// Función para desplegar mensaje de creacion
+function createPrompt(){
+    errorMessage.setAttribute('class','hide');
+    createMessage.setAttribute('class','show');
+    updateMessage.setAttribute('class','hide');
+    removeMessage.setAttribute('class','hide');
+    hidePrompt();
+};
+
+// Función para desplegar mensaje de actualizacion
+function updatePrompt(){
+    errorMessage.setAttribute('class','hide');
+    createMessage.setAttribute('class','hide');
+    updateMessage.setAttribute('class','show');
+    removeMessage.setAttribute('class','hide');
+    hidePrompt();
+};
+
+// Función para desplegar mensaje de eliminar
+function removePrompt(){
+    errorMessage.setAttribute('class','hide');
+    createMessage.setAttribute('class','hide');
+    updateMessage.setAttribute('class','hide');
+    removeMessage.setAttribute('class','show');
+    removeQuestion.setAttribute('class', 'hide');
+    hidePrompt();
+};
+
+function hidePrompt(){
+    setTimeout(() => {
+        errorMessage.setAttribute('class','hide');
+        createMessage.setAttribute('class','hide');
+        updateMessage.setAttribute('class','hide');
+        removeMessage.setAttribute('class','hide'); 
+    }, 3000);
+}
 
 // función crea titulo del li
 function taskTitleCreate(task){
@@ -218,13 +266,28 @@ function removeIconCreate(task){
     removeIcon.setAttribute('class', 'removeIcon');
     removeIcon.addEventListener('click', function (){
         liIndex = tasks.indexOf(task);
-        tasks.splice(liIndex,1);
-        storeData();
-        readData();
-    });
+        container.setAttribute('style', 'top: 70px;');
+        removeQuestion.setAttribute('class', 'show'); 
+         });
+        
+
     return removeIcon;
 }
 
+accept.addEventListener('click',function(){
+    // liIndex = tasks.indexOf(task);
+    console.log(liIndex);
+    tasks.splice(liIndex,1);
+    removePrompt();
+    storeData();
+    readData();
+    removeQuestion.setAttribute('class', 'hide');
+});
+
+cancel.addEventListener('click', function(){
+    removeQuestion.setAttribute('class', 'hide');
+});
+    
 
 
 
