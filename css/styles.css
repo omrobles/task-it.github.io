@@ -75,7 +75,7 @@ html body{
 #container4 h2,
 #container5 h2,
 #container6 h2{
-    width: 27%;
+    width: 35%;
     border-radius: 5px;
     font-size: 80%;
     text-align: left;
@@ -202,7 +202,7 @@ input{
 #container7 div{
     display: flex;
     width: 100%;
-    flex: row;
+    flex-direction: row;
     padding: 8px 0;
     border: 4px solid red;
     border-radius: 7px;
@@ -241,7 +241,7 @@ input{
 }
 
 li:last-child{
-    padding-bottom: 50px;
+    padding-bottom: 45px;
 }
 
 li{
@@ -252,6 +252,12 @@ li{
 
 li div{
     display: inline-flex;
+}
+
+li div:nth-child(1),
+li div:nth-child(3),
+li div:nth-child(4){
+    overflow-wrap: break-word;
 }
 
 li div:nth-child(1){

@@ -53,12 +53,15 @@ updateButton.addEventListener('click', function(){
     taskTitle.select();
 });
 
+// función para seleccionar completados
 checkbox.addEventListener('click',function(){
+    tasksOpen = [];
     tasks.forEach(task => {
         if(task['check'] === false){
             tasksOpen.push(task);
         }
     });
+    // tasksOpen = tasks;
     readData();
 });
 

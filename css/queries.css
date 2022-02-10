@@ -1,0 +1,63 @@
+/* Pantallas grandes 1440px */
+@media only screen and (max-width: 1200px){
+    .row{padding: 0 2%;}
+    #main-container{
+        padding: 0 2%;        
+    }
+
+}
+
+/* Pantallas medianas de 768px a 1023px */
+@media only screen and (max-width:1023px){
+    .row{padding: 0 4%;}
+    html body{font-size: 18px;}
+    #container1 h2{width: 40%;}
+}
+
+/* Pantallas chicas de 481px a 767px */
+@media only screen and (max-width: 767px){
+    #container1 h2,
+    #container4 h2,
+    #container5 h2,
+    #container6 h2{width: 60%;}
+    html body{font-size: 15px;}
+    #form{flex-direction: column;}
+    #form div:nth-child(1),
+    #form div:nth-child(2){width: 100%;}
+    #form div:nth-child(3){
+        width: 70%;
+        margin: 5px auto;
+    }
+    #container7 div{
+        flex-direction: column;
+    }
+    #container7 p:nth-child(2),
+    #container7 p:nth-child(3){
+        width: 30%;
+        margin: 3px 3px ;
+    }
+    #form p{
+        width: 100%;
+        height: 30px;
+    }
+    li div{
+        display: flex;
+        flex-direction: column;
+    }
+    #content{top:350px;}
+    li div:nth-child(1),
+    li div:nth-child(3),
+    li div:nth-child(4){
+        width: 100%;
+        margin: 2px 0;
+    }
+    li div:nth-child(2){
+        width: 100%;
+        margin-bottom: 5px;
+        display: flex;
+        flex-direction: row;
+    }
+    li div:nth-child(4){
+        padding: 0;
+    }
+}
