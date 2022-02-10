@@ -61,7 +61,6 @@ checkbox.addEventListener('click',function(){
             tasksOpen.push(task);
         }
     });
-    // tasksOpen = tasks;
     readData();
 });
 
@@ -106,7 +105,7 @@ function storeData(){
 }
 
 // función para desplegar las tareas guardadas
-function readData (){
+function readData (tasksArray){
     tasks = JSON.parse(localStorage.getItem('tasksList'));
     list.innerHTML = "<ul></ul>"
     if(tasks.length != 0){
@@ -189,7 +188,7 @@ function hidePrompt(){
         createMessage.setAttribute('class','hide');
         updateMessage.setAttribute('class','hide');
         removeMessage.setAttribute('class','hide'); 
-    }, 3000);
+    }, 1500);
 }
 
 // función crea titulo del li
