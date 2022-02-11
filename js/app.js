@@ -108,7 +108,7 @@ function storeData(){
 function readData (){
     tasks = JSON.parse(localStorage.getItem('tasksList'));
     list.innerHTML = "<ul></ul>"
-    if(tasks.length != 0){
+    if(tasks.length > 0){
         if(checkbox.checked === true){
             tasksOpen.forEach((task) => {
                 list.appendChild(insertLi(task));
