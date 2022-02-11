@@ -105,7 +105,7 @@ function storeData(){
 }
 
 // función para desplegar las tareas guardadas
-function readData (tasksArray){
+function readData (){
     tasks = JSON.parse(localStorage.getItem('tasksList'));
     list.innerHTML = "<ul></ul>"
     if(tasks.length != 0){
