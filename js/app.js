@@ -111,7 +111,11 @@ function storeData(){
 
 // función para desplegar las tareas guardadas
 function readData (){
+<<<<<<< HEAD
     // tasks = JSON.parse(localStorage.getItem('tasksList'));
+=======
+    tasks = JSON.parse(localStorage.getItem('tasksList'));
+>>>>>>> c94b2d55397d5cbaecabdb6c1dfb54d09cba9ec2
     list.innerHTML = "<ul></ul>"
     if(tasks.length > 0){
         if(checkbox.checked === true){
