@@ -94,7 +94,9 @@ cancel.addEventListener("click", function () {
 });
 
 function init() {
-  storeData();
+  if (JSON.parse(localStorage.getItem("tasksList")).length === 0) {
+    storeData();
+  }
   readData();
 }
 
@@ -115,7 +117,7 @@ function storeData() {
 
 // función para desplegar las tareas guardadas
 function readData() {
-  // tasks = JSON.parse(localStorage.getItem('tasksList'));
+  tasks = JSON.parse(localStorage.getItem("tasksList"));
   list.innerHTML = "<ul></ul>";
   if (tasks.length > 0) {
     if (checkbox.checked === true) {
